@@ -1,0 +1,11 @@
+doctype 5
+html
+  head
+    - if ENV["OPTIMIZELY_URL"]
+      = javascript_include_tag ENV["OPTIMIZELY_URL"]
+    title Policy Mirror
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tag
+  body
+    = yield

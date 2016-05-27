@@ -1,0 +1,110 @@
+=outer-container-margin
+  +outer-container
+  max-width: $max-width
+  padding: 0 flex-gutter($grid-columns)
+  border-box
+  @each $breakpoint in $visual-grid-breakpoints
+    @if $breakpoint != nil
+      +media($breakpoint)
+        padding-left: 0 flex-gutter($grid-columns) / 6
+        padding-right: 0 flex-gutter($grid-columns) / 6
+
+=button-maker($background-color: $brand-main, $text-color: white, $border: none)
+  +transition(all 0.5s ease-in-out)
+  background: $background-color
+  color: $text-color
+  text-shadow: none
+  box-shadow: none
+  padding: 18px 30px 18px 30px
+  @if $border != none
+    border: 2px $border solid
+  &:hover
+    background-color: darken($background-color, 10%)
+
+=keep-width
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  -o-box-sizing: border-box
+  box-sizing: border-box
+
+=span-half-collapse-medium
+  +span-columns(6)
+  +media($medium-screen-down)
+    +span-columns(12)
+
+
+=two-column-responsive
+  +media($medium-screen-up)
+    +span-columns(6)
+    +omega(2n)
+    &:first-child:nth-last-child(1), &:first-child:nth-last-child(1) ~ div
+      +shift(3)
+  +media($small-screen-to-medium)
+    +span-columns(12)
+
+=three-column-responsive
+  +media($medium-screen-up)
+    +span-columns(4)
+    +omega(3n)
+    &:nth-last-child(-n+3)
+      margin-bottom: 0
+    //if there aren't enough children to fill even one row, lets get things centered
+    &:first-child:nth-last-child(1), &:first-child:nth-last-child(1) ~ div
+      +shift(4)
+    &:first-child:nth-last-child(2), &:first-child:nth-last-child(2) ~ div
+      &:first-child
+        +shift(2)
+  +media($small-screen-to-medium)
+    +span-columns(6)
+    +omega(2n)
+    &:nth-last-child(-n+2)
+      margin-bottom: 0
+    &:first-child:nth-last-child(1), &:first-child:nth-last-child(1) ~ div
+      +shift(3)
+  +media($mobile)
+    +span-columns(1 of 1)
+    +omega
+    &:nth-last-child(-n+1)
+      margin-bottom: 0
+
+
+//4 columns that collapse responsively
+=four-column-responsive
+  +media($large-screen-up)
+    +span-columns(3)
+    +omega(4n)
+    &:nth-last-child(-n+4)
+      margin-bottom: 0
+    //if there aren't enough children to fill even one row, lets get things centered
+    &:first-child:nth-last-child(1), &:first-child:nth-last-child(1) ~ div
+      +span-columns(4)
+      +shift(4)
+    &:first-child:nth-last-child(2), &:first-child:nth-last-child(2) ~ div
+      &:first-child
+        +shift(3)
+    &:first-child:nth-last-child(3), &:first-child:nth-last-child(3) ~ div
+      &:first-child
+        +shift(2)
+  +media($medium-screen-to-large)
+    +span-columns(4)
+    +omega(3n)
+    &:nth-last-child(-n+3)
+      margin-bottom: 0
+    //if there aren't enough children to fill even one row, lets get things centered
+    &:first-child:nth-last-child(1), &:first-child:nth-last-child(1) ~ div
+      +shift(4)
+    &:first-child:nth-last-child(2), &:first-child:nth-last-child(2) ~ div
+      &:first-child
+        +shift(2)
+  +media($small-screen-to-medium)
+    +span-columns(6)
+    +omega(2n)
+    &:nth-last-child(-n+2)
+      margin-bottom: 0
+    &:first-child:nth-last-child(1), &:first-child:nth-last-child(1) ~ div
+      +shift(3)
+  +media($mobile)
+    +span-columns(1 of 1)
+    +omega
+    &:nth-last-child(1)
+      margin-bottom: 0

@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  pool: <%= ENV["DB_POOL"] || ENV["MAX_THREADS"] || 5 %>
+  username: <%= ENV.fetch("DATABASE_USERNAME", "postgres") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "") %>
+  reaping_frequency: <%= Integer(ENV.fetch("DB_REAPING_FREQUENCY", 10)) %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: policy_mirror_development
+
+test:
+  <<: *default
+  database: policy_mirror_test
+  min_messages: warning
+
+production: &deploy
+  url: <%= ENV["DATABASE_URL"] %>

@@ -1,0 +1,36 @@
+{
+  "asi": false,
+  "bitwise": true,
+  "browser": true,
+  "curly": true,
+  "eqeqeq": true,
+  "es3": false,
+  "es5": false,
+  "forin": true,
+  "freeze": true,
+  "funcscope": false,
+  "latedef": true,
+  "maxcomplexity": 5,
+  "maxparams": 3,
+  "newcap": true,
+  "noarg": true,
+  "nocomma": true,
+  "nonbsp": true,
+  "predef": [
+    "$",
+    "jQuery",
+
+    "jasmine",
+    "beforeEach",
+    "describe",
+    "expect",
+    "it",
+
+    "angular",
+    "inject",
+    "module"
+  ],
+  "trailing": true,
+  "undef": true,
+  "unused": "vars"
+}
