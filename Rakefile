@@ -9,7 +9,7 @@ Rails.application.load_tasks
 SlimLint::RakeTask.new
 
 task(:default).clear
-task default: ["factory_girl:lint", :spec, :rubocop, :slim_lint]
+task default: [:spec, :rubocop, :slim_lint]
 
 if defined? RSpec
   task(:spec).clear

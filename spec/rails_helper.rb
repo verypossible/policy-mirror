@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
 abort_message = "The Rails environment is running in production mode!"
@@ -11,14 +12,22 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
-  config.include FactoryGirl::Syntax::Methods
 
   # https://github.com/rspec/rspec-rails/issues/396
   config.before(:example, type: :view) do
     view.lookup_context.view_paths.push "app/views/application"
   end
 
-  config.include FactoryGirl::Syntax::Methods
+  # Stub out Glassfrog API calls
+  config.before(:each) do
+    glassfrog_response = {
+      circles: "",
+      roles: "",
+      linked: { roles: "", circles: "", policies: "", people: "" }
+    }
+    allow_any_instance_of(Glassfrog).
+      to receive(:request).and_return(glassfrog_response)
+  end
 end
 
 Shoulda::Matchers.configure do |config|

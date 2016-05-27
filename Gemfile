@@ -12,6 +12,8 @@ gem "awesome_print"
 gem "bitters"
 gem "bourbon", "~> 4.2.7"
 gem "bullet"
+gem "database_cleaner"
+gem "httparty"
 gem "jquery-rails"
 gem "neat"
 gem "rack-canonical-host"
@@ -34,7 +36,6 @@ group :development, :test do
   gem "capybara"
   gem "derailed"
   gem "dotenv-rails"
-  gem "factory_girl_rails"
   gem "faker"
   gem "pry"
   gem "pry-byebug"
@@ -55,5 +56,6 @@ group :development do
 end
 
 group :test do
+  gem "rspec_junit_formatter", "0.2.2"
   gem "shoulda-matchers"
 end
