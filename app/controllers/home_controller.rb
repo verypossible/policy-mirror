@@ -1,21 +1,23 @@
 # frozen_string_literal: true
 class HomeController < ApplicationController
   def index
-    circle_data = GLASSFROG_API.get_resource(:circles)
-    @circles = circle_data[:circles]
-    @policies = circle_data[:linked][:policies]
+    set_resources("circles")
   end
 
   def roles
-    policy_data = GLASSFROG_API.get_resource(:policies)
-    @policies = policy_data[:policies]
-    group_policies
-    @roles = policy_data[:linked][:roles]
+    set_resources("roles")
   end
 
   private
 
-  def group_policies
-    @policies = @policies.group_by { |policy| policy[:links][:role_id] }
+  def set_resources(resource)
+    policy_data = GLASSFROG_API.get_resource(:policies)
+    @policies = policy_data[:policies]
+    group_policies("#{resource.singularize}_id")
+    instance_variable_set("@#{resource}", policy_data[:linked][resource])
+  end
+
+  def group_policies(key)
+    @policies = @policies.group_by { |policy| policy[:links][key] }
   end
 end
