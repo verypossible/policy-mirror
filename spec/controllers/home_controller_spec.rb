@@ -5,5 +5,7 @@ RSpec.describe HomeController, type: :controller do
   describe 'get #index' do
     before { get :index }
     it { expect(response).to render_template(:index) }
+    it { expect(assigns(:circles)).not_to be_nil }
+    it { expect(assigns(:policies)).not_to be_nil }
   end
 end

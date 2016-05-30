@@ -1,5 +1,3 @@
-deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: policy-mirror
+test:
+  override:
+    - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
