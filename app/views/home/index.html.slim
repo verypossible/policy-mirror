@@ -1,10 +1,8 @@
 h1 Policies by Circle
+= link_to "View policies by role", roles_path
 - @circles.each do |circle|
   h2 #{circle[:name]}
   ul
     - circle[:links][:policies].each do |policy_id|
-      li
-        - policy = policy_from_id(policy_id)
-        h4 #{policy[:title]}
-        = simple_format(policy[:body])
-
+      - policy = policy_from_id(policy_id)
+      = render partial: "policy", locals: { policy: policy }

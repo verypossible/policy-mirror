@@ -23,6 +23,7 @@ RSpec.configure do |config|
     glassfrog_response = {
       circles: "",
       roles: "",
+      policies: [{ links: { role_id: "" } }],
       linked: { roles: "", circles: "", policies: "", people: "" }
     }
     allow_any_instance_of(Glassfrog).
