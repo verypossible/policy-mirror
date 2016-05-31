@@ -25,7 +25,7 @@ RSpec.configure do |config|
       roles: "",
       policies: [{ links: { role_id: "" } }],
       linked: { roles: "", circles: "", policies: "", people: "" }
-    }
+    }.with_indifferent_access
     allow_any_instance_of(Glassfrog).
       to receive(:request).and_return(glassfrog_response)
   end

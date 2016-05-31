@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 module ApplicationHelper
-  def policy_from_id(id)
-    @policies.detect { |policy| policy[:id] == id }
+  def resource_from_id(id, resource)
+    return { name: "#{resource.capitalize} Unspecified" } unless id
+    collection(resource).detect { |r| r[:id] == id }
   end
 
-  def role_from_id(id)
-    return { name: "Role Unspecified" } unless id
-    @roles.detect { |role| role[:id] == id }
+  private
+
+  def collection(resource)
+    instance_variable_get("@#{resource.pluralize}")
   end
 end
