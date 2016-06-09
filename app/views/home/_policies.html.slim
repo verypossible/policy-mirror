@@ -1,0 +1,11 @@
+label for="filter" Search
+input type="text" id="filter" name="filter"
+- @policies.each do |resource_id, policies|
+  - resource = resource_from_id(resource_id, resource_name)
+  h2 #{resource[:name]}
+  ul
+    - policies.each do |policy|
+      li.searchable
+        h4 #{policy[:title]}
+        = simple_format(policy[:body])
+
