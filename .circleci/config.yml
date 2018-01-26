@@ -1,0 +1,39 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/policy-mirror
+    docker:
+      - image: circleci/ruby:2.5.0-node
+      - image: circleci/postgres:10.1
+    steps:
+      - checkout
+
+      # Restore bundle cache
+      - type: cache-restore
+        key: policy-mirror-{{ checksum "Gemfile.lock" }}
+
+      # Bundle install dependencies
+      - run: bundle install --path vendor/bundle
+
+      # Store bundle cache
+      - type: cache-save
+        key: policy-mirror-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+      # Database setup
+      - run: bin/rails db:create
+      - run: bin/rails db:schema:load
+
+      # Run rspec in parallel
+      - type: shell
+        command: |
+          bundle exec rspec --profile 10 \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress \
+                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      # Save artifacts
+      - type: store_test_results
+        path: /tmp/test-results
