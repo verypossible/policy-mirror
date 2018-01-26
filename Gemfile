@@ -3,19 +3,19 @@ source "https://rubygems.org"
 
 ruby File.read(File.join(File.dirname(__FILE__), ".ruby-version")).strip
 
-gem "rails", "~> 4.2.6"
+gem "rails", "~> 5.1"
 gem "puma"
-gem "pg"
+gem "pg", "~> 0.21"
 
 gem "analytics-ruby", "~> 2.0.0", require: "segment/analytics"
 gem "awesome_print"
-gem "bitters"
+gem "bitters", "~> 1.1.0"
 gem "bourbon", "~> 4.2.7"
 gem "bullet"
 gem "database_cleaner"
 gem "httparty"
 gem "jquery-rails"
-gem "neat"
+gem "neat", "~> 1.7.4"
 gem "rack-canonical-host"
 gem "redcarpet"
 gem "rollbar"
@@ -28,7 +28,6 @@ group :production do
   gem "lograge"
   gem "newrelic_rpm"
   gem "rack-timeout"
-  gem "rails_12factor"
 end
 
 group :development, :test do
@@ -43,19 +42,21 @@ group :development, :test do
   gem "pry-remote"
   gem "rack-mini-profiler"
   gem "rspec-rails"
+  gem "simplecov"
   gem "stackprof"
 end
 
 group :development do
-  gem "foreman"
-  gem "refills"
-  gem "simplecov", require: false
+  gem "listen", ">= 3.0.5", "< 3.2"
+  gem "rack-mini-profiler"
   gem "spring"
   gem "spring-commands-rspec"
-  gem "web-console", "~> 2.0"
+  gem "spring-watcher-listen", "~> 2.0.0"
+  gem "web-console", ">= 3.3.0"
 end
 
 group :test do
+  gem "rails-controller-testing"
   gem "rspec_junit_formatter", "0.2.2"
   gem "shoulda-matchers"
 end
